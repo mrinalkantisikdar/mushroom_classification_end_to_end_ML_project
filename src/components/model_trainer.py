@@ -71,14 +71,3 @@ class ModelTrainer:
             raise CustomException(e,sys)
         
 
-
-        '''(train_array.loc[:, train_array.columns != 'classs']).to_numpy(), # [:, 1:] selecting all columns except the first one in the train_array     df.loc[:, df.columns != 'b']
-                (train_array.loc[:, train_array.columns == 'classs']).to_numpy(),  #[:, 0] selecting only the first column in the train_array
-                (test_array.loc[:, test_array.columns != 'classs']).to_numpy(),  # same treatement for the test array
-                (test_array.loc[:, test_array.columns == 'classs']).to_numpy()'''
-        
-
-        '''train_array[:,:-1],
-                train_array[:,-1],
-                test_array[:,:-1],
-                test_array[:,-1]'''
