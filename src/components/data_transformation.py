@@ -59,15 +59,6 @@ class DataTransformation:
                         
             logging.info('Pipeline Initiated')
             
-            '''# target column pipeline
-            tar_pipeline=Pipeline(
-                steps=[
-                ('labelencoder', LabelEncoder)
-                # no need to standardize after mapping 0 to 1
-                ]
-
-           )'''
-
             # Categorigal Pipeline
             cat_pipeline=Pipeline(
                 steps=[
