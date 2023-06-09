@@ -47,10 +47,7 @@ class DataTransformation:
     def get_data_transformation_object(self):
         try:
             logging.info('Data Transformation initiated')
-            #Define target column
-            #target_col= ['classs']
-            # Define class mapping
-            #class_mapping = {label: idx for idx, label in enumerate(np.unique(df['classlabel']))}
+
 
             # Define categorical columns
 
@@ -76,8 +73,7 @@ class DataTransformation:
                 steps=[
                 ('imputer',SimpleImputer(strategy='most_frequent')),
                 ('onehotencoder',OneHotEncoder(handle_unknown='ignore', drop= 'first'))
-                #('get_dummies',pd.get_dummies(columns=[categorical_cols], drop_first=True))
-                # no need to standardize after get dummies
+
                 ]
 
             )
@@ -139,19 +135,12 @@ class DataTransformation:
 
             logging.info("Applying preprocessing object on training and testing datasets.")
             
-            # convert the train & test df to numpy array for fast calculation
-            #train_arr = np.c_[input_feature_train_arr, np.concatenate([np.array(target_feature_train_df)], axis=1)] # np.c is concatenation
-            #train_arr = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df)], axis=1)
-            #test_arr = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df)], axis=1)
-            #test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
-            
+
             train_arr_df = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
             test_arr_df = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
             train_arr= train_arr_df.to_numpy() # converting dataframe to numpy array
             test_arr= test_arr_df.to_numpy()
 
-            #train_arr = np.c_[input_feature_train_arr, np.array(pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1))]
-            #test_arr = np.c_[input_feature_test_arr, np.array(pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1))]
 
 
 
@@ -177,27 +166,3 @@ class DataTransformation:
         
 
 
-'''
-            # training dataframe
-            train_df[target_column_name]=train_df[target_column_name].map({"p": 0, "e": 1})
-            target_feature_train_df=train_df[target_column_name]# target column with p mapped to 0 and e mapped to 1
-            train_df['habitat']=train_df['habitat'].map({'d\n':'d', 'l\n':'l', 'g\n':'g', 'm\n':'m', 'p\n':'p', 'u\n':'u', 'w\n':'w', 'l':'l'}) # handling the discripancy in last column due to new line
-            input_feature_train_df = train_df.drop(columns=drop_columns,axis=1) # first dropping the target column & other unimportant columns
-            for cols in input_feature_train_df.columns:
-                input_feature_train_df= pd.get_dummies(input_feature_train_df, columns=[cols], drop_first=True)
-            
-
-
-            # same treatment as before for testing dataframe
-            test_df[target_column_name]=test_df[target_column_name].map({"p": 0, "e": 1})
-            target_feature_test_df=test_df[target_column_name]
-            test_df['habitat']=test_df['habitat'].map({'d\n':'d', 'l\n':'l', 'g\n':'g', 'm\n':'m', 'p\n':'p', 'u\n':'u', 'w\n':'w', 'l':'l'})
-            input_feature_test_df=test_df.drop(columns=drop_columns,axis=1)
-            for cols in input_feature_test_df.columns:
-                input_feature_test_df= pd.get_dummies(input_feature_test_df, columns=[cols], drop_first=True)
-
-
-            categorical_cols= ['cap_shape','cap_surface','cap_color','bruises','odor','gill_attachment','gill_spacing','gill_size','gill_color','stalk_shape',
-                'stalk_root','stalk_surface_above_ring','stalk_surface_below_ring','stalk_color_above_ring','stalk_color_below_ring','veil_type',
-                'veil_color','ring_number','ring_type','spore_print_color','population','habitat']
-            '''

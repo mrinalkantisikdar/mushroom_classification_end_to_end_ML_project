@@ -25,22 +25,15 @@ class ModelTrainer:
     def __init__(self):
         self.model_trainer_config = ModelTrainerConfig()
 
-    def initate_model_training(self,train_array,test_array):
+    def initate_model_training(self,train_arr,test_arr):
         try:
             logging.info('Splitting Dependent and Independent variables from train and test data')
             X_train, y_train, X_test, y_test = (
-                train_array[:,:-1],
-                train_array[:,-1],
-                test_array[:,:-1],
-                test_array[:,-1]
-                #np.array(train_array.iloc[: , :-1]),
-                #np.array(train_array.iloc[:,-1:]),
-                #np.array(test_array.iloc[: , :-1]),
-                #np.array(test_array.iloc[:,-1:])
-                #train_array.iloc[: , :-1],
-                #train_array.iloc[:,-1:],
-                #test_array.iloc[: , :-1],
-                #test_array.iloc[:,-1:]             
+                train_arr[:,:-1],
+                train_arr[:,-1],
+                test_arr[:,:-1],
+                test_arr[:,-1]
+            
             )
 
             models={

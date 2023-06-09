@@ -14,6 +14,5 @@ cassandra-driver==3.25.0
 cassandra-csv==0.3
 astrapy==0.0.2
 simplejson==3.17.2
-mysql==0.0.3
 pymongo==4.3.3
 -e .
