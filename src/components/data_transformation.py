@@ -12,6 +12,8 @@ from sklearn.preprocessing import OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import SelectKBest, chi2
 
+from scipy.sparse import csr_matrix
+
 from src.exception import CustomException
 from src.logger import logging
 
@@ -127,10 +129,18 @@ class DataTransformation:
             logging.info("Applying preprocessing object on training and testing datasets.")
             
 
-            train_arr_df = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
-            test_arr_df = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
-            train_arr= train_arr_df.to_numpy() # converting dataframe to numpy array
-            test_arr= test_arr_df.to_numpy()
+            train_arr = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
+            test_arr = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
+            #train_arr= np.array(train_arr_df) # converting dataframe to numpy array
+            #test_arr= np.array(test_arr_df)
+            #train_arr= train_nparr.astype(int)
+            #test_arr= test_nparr.astype(int)
+            #X_train_arr= np.array(train_arr_df.iloc[:, :-1])
+            #y_train_arr= np.array(train_arr_df.iloc[:, -1])
+            #X_test_arr= np.array(test_arr_df.iloc[:, :-1])
+            #y_test_arr= np.array(test_arr_df.iloc[:, -1])
+            #train_arr= np.c_[X_train_arr, y_train_arr]
+            #test_arr= np.c_[X_test_arr, y_test_arr]
 
 
 
