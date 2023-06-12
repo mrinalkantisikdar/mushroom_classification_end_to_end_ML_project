@@ -37,7 +37,7 @@ def predict_datapoint():        # this funciton will also be present in form.htm
         predict_pipeline=PredictPipeline()
         pred=predict_pipeline.predict(final_new_data)
 
-        results=round(pred)
+        results=pred
 
         return render_template('results.html',final_result=results)     # return the results.html to form
 
