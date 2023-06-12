@@ -30,10 +30,10 @@ class ModelTrainer:
         try:
             logging.info('Splitting Dependent and Independent variables from train and test data')
             X_train, y_train, X_test, y_test = (
-                np.array(train_arr.iloc[:,:-1]),
-                np.array(train_arr.iloc[:,-1]),
-                np.array(test_arr.iloc[:,:-1]),
-                np.array(test_arr.iloc[:,:-1])                     
+                train_arr[:,:-1].astype(int),
+                train_arr[:,-1].astype(int),
+                test_arr[:,:-1].astype(int),
+                test_arr[:,-1].astype(int)                 
             
             )
 
@@ -44,8 +44,8 @@ class ModelTrainer:
             }
             
             model_report:dict=evaluate_model(X_train,y_train,X_test,y_test,models)
-            print(model_report)
-            print('\n====================================================================================\n')
+            #print(model_report)
+            #print('\n====================================================================================\n')
             logging.info(f'Model Report : {model_report}')
 
             # To get best model score from dictionary 
@@ -57,8 +57,8 @@ class ModelTrainer:
             
             best_model = models[best_model_name]
 
-            print(f'Best Model Found , Model Name : {best_model_name} , accuracy : {best_model_score}')
-            print('\n====================================================================================\n')
+            #print(f'Best Model Found , Model Name : {best_model_name} , accuracy : {best_model_score}')
+            #print('\n====================================================================================\n')
             logging.info(f'Best Model Found , Model Name : {best_model_name} , accuracy : {best_model_score}')
 
             save_object(

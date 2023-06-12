@@ -65,8 +65,8 @@ class DataTransformation:
             cat_pipeline=Pipeline(
                 steps=[
                 ('imputer',SimpleImputer(strategy='most_frequent')),
-                ('onehotencoder',OneHotEncoder(handle_unknown='ignore', drop= 'first'))
-
+                ('onehotencoder',OneHotEncoder(handle_unknown='ignore', drop= 'first', sparse_output= False)),
+                #('scaler',StandardScaler(with_mean=False))
                 ]
 
             )
@@ -127,14 +127,22 @@ class DataTransformation:
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
             logging.info("Applying preprocessing object on training and testing datasets.")
+
+
+
+            #train_arr= np.r_[input_feature_train_arr, np.array(target_feature_train_df)]
+            #test_arr= np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
             
 
-            train_arr = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
-            test_arr = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
-            #train_arr= np.array(train_arr_df) # converting dataframe to numpy array
-            #test_arr= np.array(test_arr_df)
-            #train_arr= train_nparr.astype(int)
-            #test_arr= test_nparr.astype(int)
+            train_arr_df = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
+            test_arr_df = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
+            train_arr= np.array(train_arr_df) # converting dataframe to numpy array
+            test_arr= np.array(test_arr_df)
+            #print(train_arr)
+
+            #train_arr= train_arr_df
+            #test_arr= test_arr_df
+
             #X_train_arr= np.array(train_arr_df.iloc[:, :-1])
             #y_train_arr= np.array(train_arr_df.iloc[:, -1])
             #X_test_arr= np.array(test_arr_df.iloc[:, :-1])
