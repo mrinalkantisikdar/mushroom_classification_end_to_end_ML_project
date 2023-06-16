@@ -37,9 +37,14 @@ def predict_datapoint():        # this funciton will also be present in form.htm
         predict_pipeline=PredictPipeline()
         pred=predict_pipeline.predict(final_new_data)
 
+        target_map= {
+                "poisonous": 0, 
+                "edible": 1
+                }
+
         results=pred
 
-        return render_template('results.html',final_result=results)     # return the results.html to form
+        return render_template('results.html',final_result=list(target_map.keys())[list(target_map.values()).index(results)])     # return the results.html to form
 
 
 
