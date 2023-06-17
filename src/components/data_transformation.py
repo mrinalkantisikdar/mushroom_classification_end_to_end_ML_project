@@ -130,14 +130,14 @@ class DataTransformation:
 
 
 
-            #train_arr= np.r_[input_feature_train_arr, np.array(target_feature_train_df)]
-            #test_arr= np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+            train_arr= np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
+            test_arr= np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
             
 
-            train_arr_df = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
-            test_arr_df = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
-            train_arr= np.array(train_arr_df) # converting dataframe to numpy array
-            test_arr= np.array(test_arr_df)
+            #train_arr_df = pd.concat([pd.DataFrame(input_feature_train_arr), pd.DataFrame(target_feature_train_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
+            #test_arr_df = pd.concat([pd.DataFrame(input_feature_test_arr), pd.DataFrame(target_feature_test_df).reset_index().drop(['index'], axis=1)], axis=1, ignore_index= True, join= 'inner')
+            #train_arr= np.array(train_arr_df) # converting dataframe to numpy array
+            #test_arr= np.array(test_arr_df)
             #print(train_arr)
 
             #train_arr= train_arr_df
